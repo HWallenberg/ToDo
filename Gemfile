@@ -6,7 +6,7 @@ ruby "3.0.0"
 gem "rails", "~> 7.1.1"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem "sprockets-rails"#,"~> 2.3.2"
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
@@ -45,8 +45,11 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'sassc-rails'
-gem 'bootstrap', '~> 5.3.1'
+gem 'bootstrap', '~> 5.3', '>= 5.3.1'
+#gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
+gem 'byebug'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

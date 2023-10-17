@@ -1,28 +1,62 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>My To Do List</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
-    <th>Todo Item</th>
-    <th>Completed</th>
+    <th>ID</th>
+    <th>To-do Item</th>
     <th colspan="3"></th>
   </thead>
 <%#<div id="lists">%>
   <% @lists.each do |list| %>
     <%#<%= render list %>
-    <tr>
-      <td><%= list.description %></td>
-      <td><%= list.completed %></td>
-      <td><%= link_to 'Show', list  %></td>
-      <td><%= link_to 'Edit', edit_list_path(list)  %></td>
-      <td><%= link_to "Destroy", @list, method: :delete %>
-    </tr>
+    <% if list.completed %>
+      <tr class="table-secondary">
+        <td><%= list.id %></td>
+        <td class="striker"> <%= link_to list.description, edit_list_path(list) %></td>
+        <td class="text-center">
+          <%#this is a link to delete using some delete javascript in rails-ujs.js library the scaffolding generates a delete button (commented out)%>
+          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"%>
+          <% button_to "Delete", list, method: :delete%>
+        </td>
+      </tr>
+    <% else %>
+      <tr>
+        <td><%= list.id %></td>
+        <td> <%= link_to list.description, edit_list_path(list) %></td>
+        <td class="text-center">
+          <%#this is a link to delete using some delete javascript in rails-ujs.js library the scaffolding generates a delete button (commented out)%>
+          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+          <% button_to "Delete", list, method: :delete%>
+        </td>
+      </tr>
     <%#<p>
       <%= link_to "Show this to do", list %>
     <%#</p>%>
+    <% end %>
   <% end %>
 <%#</div>%>
 </table>
 
-<%= link_to "New to do", new_list_path %>
+<%= link_to "New to do", new_list_path, class: "btn btn-primary" %>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Open Modal
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bootstrap Modal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is a simple Bootstrap modal.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
