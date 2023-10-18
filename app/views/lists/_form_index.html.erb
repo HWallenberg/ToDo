@@ -1,0 +1,23 @@
+<%= form_with(model: list) do |form| %>
+  <% if list.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
+
+      <ul>
+        <% list.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-inline my-2 my-lg-0 ml-auto">
+    <div class="input-group">
+      <% form.label :description, style: "display: block" %>
+      <%= form.text_field :description, class: "form-control" %>
+      <div class="input-group-append">
+        <%= form.submit "Add to do", class: "btn btn-outline-success ml-2"%>
+      </div>
+    </div>
+  </div>
+<% end %>

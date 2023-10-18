@@ -45,8 +45,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'sassc-rails'
-gem 'bootstrap', '~> 5.3', '>= 5.3.1'
-#gem 'bootstrap', '~> 4.0'
+gem 'fontawesome5-rails'
+gem 'bootstrap', '~> 5.3'
 gem 'jquery-rails'
 gem 'byebug'
 

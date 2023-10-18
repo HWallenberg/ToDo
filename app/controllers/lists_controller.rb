@@ -3,6 +3,7 @@ class ListsController < ApplicationController
 
   # GET /lists or /lists.json
   def index
+    @list = List.new
     @lists = List.all
   end
 
@@ -21,7 +22,8 @@ class ListsController < ApplicationController
 
   # POST /lists or /lists.json
   def create
-    @list = List.new(list_params)
+    
+  @list = List.new(list_params)
 
     respond_to do |format|
       if @list.save
@@ -32,10 +34,13 @@ class ListsController < ApplicationController
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
+    
+    
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
+    #byebug
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to lists_url, notice: "List was successfully updated." }
@@ -61,7 +66,10 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-      @list = List.find(params[:id])
+      @list = List.find_by(id: params[:id])
+      if @list.nil?
+        @list = List.new
+      end
     end
 
     # Only allow a list of trusted parameters through.
