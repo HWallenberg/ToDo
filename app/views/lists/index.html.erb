@@ -1,29 +1,40 @@
 <table class="table table-bordered">
   <thead>
-    <th>ID</th>
-    <th>To-do Item</th>
-    <th colspan="3"></th>
+    <th>Task</th>
+    <th colspan="2"></th>
   </thead>
 <%#<div id="lists">%>
   <% @lists.each do |list| %>
     <%#<%= render list %>
     <% if list.completed %>
       <tr class="table-secondary">
-        <td><%= list.id %></td>
         <td class="striker"> <%= link_to list.description, edit_list_path(list) %></td>
+        <td>
+          <%= form_for(list) do |f|%>
+            <%= f.text_field :description, :style => "visibility:hidden" %>
+            <%= f.check_box :completed, :checked => false, :style => "visibility:hidden" %>
+            <%= f.submit "Uncomplete", class: "btn btn-primary btn-sm"%>
+          <% end %>
+        </td>
         <td class="text-center">
           <%#this is a link to delete using some delete javascript in rails-ujs.js library the scaffolding generates a delete button (commented out)%>
-          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"%>
+          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm"%>
           <% button_to "Delete", list, method: :delete%>
         </td>
       </tr>
     <% else %>
       <tr>
-        <td><%= list.id %></td>
         <td> <%= link_to list.description, edit_list_path(list) %></td>
+        <td>
+          <%= form_for(list) do |f|%>
+            <%= f.text_field :description, :style => "visibility:hidden" %>
+            <%= f.check_box :completed, :checked => true, :style => "visibility:hidden" %>
+            <%= f.submit "Complete", class: "btn btn-primary btn-sm"%>
+          <% end %>
+        </td>
         <td class="text-center">
           <%#this is a link to delete using some delete javascript in rails-ujs.js library the scaffolding generates a delete button (commented out)%>
-          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+          <%= link_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
           <% button_to "Delete", list, method: :delete%>
         </td>
       </tr>
