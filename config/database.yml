@@ -28,5 +28,5 @@ production:
   database: storage/production.pg
   pool: 5
   timeout: 5000
-  host: localhost
-  port: 5432
+  url: <%= ENV['DATABASE_URL'] %>
+
